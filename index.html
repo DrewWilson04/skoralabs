@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skora Labs — Done-For-You Tech for Small Business</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111827;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+        h3 { font-size: 1.15rem; font-weight: 600; }
+        p { color: #4B5563; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 6rem 0; }
+        .accent { color: #2563EB; }
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+        .btn-primary { background: #2563EB; color: #fff; }
+        .btn-primary:hover { background: #1D4ED8; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
+        .btn-outline { background: transparent; color: #2563EB; border: 1.5px solid #2563EB; }
+        .btn-outline:hover { background: #EFF6FF; }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #2563EB;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #111827;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-logo span { color: #2563EB; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: #4B5563;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #111827; }
+        .nav-cta { display: flex; align-items: center; }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: #111827; transition: all 0.3s; border-radius: 2px; }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px; left: 0; right: 0;
+                background: #fff;
+                padding: 1.5rem;
+                border-bottom: 1px solid #E5E7EB;
+                gap: 1.25rem;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            }
+            .nav-cta.open {
+                display: flex;
+                position: absolute;
+                top: auto; left: 0; right: 0;
+                padding: 0 1.5rem 1.5rem;
+            }
+        }
+
+        /* ── HERO ── */
+        #hero {
+            padding-top: 10rem;
+            padding-bottom: 7rem;
+            background: linear-gradient(160deg, #F0F5FF 0%, #ffffff 55%);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            color: #2563EB;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .hero-badge::before { content: '●'; font-size: 0.45rem; }
+        .hero-headline { margin-bottom: 1.25rem; }
+        .hero-sub {
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin-bottom: 2.25rem;
+            line-height: 1.75;
+        }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+        .hero-divider { border: none; border-top: 1px solid #E5E7EB; margin-bottom: 2.5rem; }
+        .hero-stats { display: flex; gap: 3.5rem; flex-wrap: wrap; }
+        .stat-num { font-size: 1.9rem; font-weight: 800; color: #111827; line-height: 1; }
+        .stat-label { font-size: 0.82rem; color: #6B7280; margin-top: 0.3rem; }
+
+        /* ── SERVICES ── */
+        #services { background: #fff; }
+        .services-header { margin-bottom: 3.5rem; }
+        .services-header h2 { margin-bottom: 0.75rem; }
+        .services-header p { font-size: 1.05rem; max-width: 500px; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 860px) { .services-grid { grid-template-columns: 1fr; } }
+
+        .service-card {
+            border: 1.5px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            border-color: #93C5FD;
+            transform: translateY(-2px);
+        }
+        .service-card.featured {
+            border-color: #2563EB;
+            background: linear-gradient(160deg, #F0F5FF 0%, #fff 60%);
+        }
+        .service-card.coming-soon {
+            opacity: 0.8;
+        }
+
+        .service-icon-wrap {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: #F3F4F6;
+        }
+        .service-card.featured .service-icon-wrap { background: #DBEAFE; }
+
+        .service-pill {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            margin-bottom: 0.75rem;
+            width: fit-content;
+        }
+        .pill-live { background: #D1FAE5; color: #065F46; }
+        .pill-soon { background: #F3F4F6; color: #6B7280; }
+        .pill-flagship { background: #DBEAFE; color: #1D4ED8; }
+
+        .service-card h3 { margin-bottom: 0.6rem; font-size: 1.2rem; }
+        .service-card p { font-size: 0.9rem; line-height: 1.7; flex: 1; }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .service-features li {
+            font-size: 0.85rem;
+            color: #374151;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .service-features li::before {
+            content: '✓';
+            color: #2563EB;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+        .service-card-cta {
+            margin-top: 2rem;
+        }
+
+        /* ── HOW IT WORKS ── */
+        #how-it-works { background: #F9FAFB; }
+        .hiw-header { margin-bottom: 3.5rem; }
+        .hiw-header h2 { margin-bottom: 0.75rem; }
+        .hiw-header p { font-size: 1.05rem; max-width: 480px; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.75rem; }
+        .step {
+            background: #fff;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: box-shadow 0.2s;
+        }
+        .step:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .step-num {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: #EFF6FF;
+            color: #2563EB;
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+        .step h3 { margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .step p { font-size: 0.88rem; line-height: 1.7; }
+
+        /* ── WHO WE SERVE ── */
+        #who-we-serve { background: #fff; }
+        .serve-header { margin-bottom: 3rem; }
+        .serve-header h2 { margin-bottom: 0.75rem; }
+        .serve-header p { font-size: 1.05rem; max-width: 480px; margin: 0 auto; }
+        .serve-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1.25rem;
+        }
+        .serve-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 14px;
+            padding: 1.75rem 1.25rem;
+            text-align: center;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+        .serve-card:hover {
+            border-color: #93C5FD;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.08);
+            transform: translateY(-2px);
+        }
+        .serve-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .serve-card h3 { font-size: 0.95rem; font-weight: 600; color: #111827; }
+        .serve-card p { font-size: 0.8rem; margin-top: 0.3rem; color: #6B7280; }
+
+        /* ── ABOUT ── */
+        #about { background: #F9FAFB; }
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .about-visual {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        .chat-bubble {
+            background: #fff;
+            border-radius: 16px 16px 16px 4px;
+            padding: 1.1rem 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            font-size: 0.88rem;
+            color: #111827;
+            line-height: 1.6;
+        }
+        .chat-bubble.right {
+            background: #2563EB;
+            color: #fff;
+            border-radius: 16px 16px 4px 16px;
+        }
+        .chat-label { font-size: 0.68rem; font-weight: 600; color: #6B7280; margin-bottom: 0.35rem; letter-spacing: 0.04em; }
+        .chat-label.blue { color: #2563EB; text-align: right; }
+        .about-text h2 { margin-bottom: 1.25rem; }
+        .about-text p { margin-bottom: 1rem; line-height: 1.8; font-size: 0.95rem; }
+
+        @media (max-width: 860px) {
+            .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+
+        /* ── TEAM ── */
+        #team { background: #fff; }
+        .team-header { margin-bottom: 3.5rem; }
+        .team-header h2 { margin-bottom: 0.75rem; }
+        .team-header p { font-size: 1.05rem; max-width: 440px; margin: 0 auto; }
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .team-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            width: 260px;
+            transition: box-shadow 0.2s;
+        }
+        .team-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+        .team-avatar {
+            width: 76px; height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #DBEAFE 0%, #93C5FD 100%);
+            margin: 0 auto 1.25rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1D4ED8;
+        }
+        .team-card h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .team-role { font-size: 0.8rem; color: #2563EB; font-weight: 600; }
+        .team-card p { font-size: 0.85rem; margin-top: 0.75rem; line-height: 1.65; }
+
+        /* ── CONTACT ── */
+        #contact { background: #F9FAFB; }
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        .contact-info h2 { margin-bottom: 1rem; }
+        .contact-info > p { margin-bottom: 2rem; line-height: 1.75; }
+        .contact-detail { display: flex; align-items: center; gap: 0.875rem; margin-bottom: 1rem; }
+        .contact-icon {
+            width: 42px; height: 42px;
+            background: #EFF6FF;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+        }
+        .contact-detail a { color: #111827; text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .contact-detail a:hover { color: #2563EB; }
+
+        .contact-form {
+            background: #fff;
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        .contact-form h3 { margin-bottom: 1.75rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: #374151; margin-bottom: 0.4rem; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: #111827;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            background: #fff;
+            -webkit-appearance: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+        .form-group textarea { resize: vertical; min-height: 110px; }
+        .form-submit { width: 100%; padding: 0.875rem; font-size: 0.95rem; border-radius: 10px; margin-top: 0.25rem; }
+
+        @media (max-width: 860px) {
+            .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* ── FOOTER ── */
+        footer { background: #111827; color: #9CA3AF; padding: 2.5rem 0; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
+        .footer-logo { font-size: 1.1rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -0.02em; }
+        .footer-logo span { color: #60A5FA; }
+        footer p { font-size: 0.83rem; }
+        .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+        .footer-links a { color: #9CA3AF; text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
+
+        .form-success { text-align: center; padding: 2rem; display: none; }
+        .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .form-success h3 { color: #111827; margin-bottom: 0.5rem; }
+        .form-success p { font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="container nav-inner">
+        <a href="#hero" class="nav-logo">Skora<span>Labs</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#who-we-serve">Who We Serve</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-cta" id="navCta">
+            <a href="#contact" class="btn btn-primary">Get Started</a>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="container">
+        <div class="hero-badge">Done-For-You Tech for Small Business</div>
+        <h1 class="hero-headline">
+            The Tech Team Your<br>Business Never <span class="accent">Had.</span>
+        </h1>
+        <p class="hero-sub">
+            Big companies have receptionists, websites, and custom software. Small businesses have voicemail and a Facebook page. Skora Labs closes that gap — building and running the technology your business needs to compete, at prices that actually make sense.
+        </p>
+        <div class="hero-actions">
+            <a href="#services" class="btn btn-primary">See Our Services</a>
+            <a href="#contact" class="btn btn-outline">Book a Free Call</a>
+        </div>
+        <hr class="hero-divider">
+        <div class="hero-stats">
+            <div>
+                <div class="stat-num">24/7</div>
+                <div class="stat-label">Always on for your customers</div>
+            </div>
+            <div>
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Done for you</div>
+            </div>
+            <div>
+                <div class="stat-num">Days</div>
+                <div class="stat-label">Not months to get started</div>
+            </div>
+            <div>
+                <div class="stat-num">3</div>
+                <div class="stat-label">Core services (and growing)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <div class="container">
+        <div class="services-header">
+            <div class="section-label">Our Services</div>
+            <h2>Everything you need.<br>Nothing you don't.</h2>
+            <p>We build and manage the technology — you run your business. Start with one service or all three.</p>
+        </div>
+        <div class="services-grid">
+
+            <!-- AI Receptionist -->
+            <div class="service-card featured">
+                <div class="service-icon-wrap">🎙️</div>
+                <span class="service-pill pill-flagship">Flagship</span>
+                <h3>AI Receptionist</h3>
+                <p>A real-sounding AI that answers every call 24/7 — handling FAQs, taking messages, and transferring calls. Your business never misses a lead, even at 2am.</p>
+                <ul class="service-features">
+                    <li>Answers calls in your business's name</li>
+                    <li>Handles FAQs and books appointments</li>
+                    <li>Takes messages & sends warm transfers</li>
+                    <li>Works nights, weekends, and holidays</li>
+                    <li>Set up and managed entirely for you</li>
+                </ul>
+                <div class="service-card-cta">
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+
+            <!-- Websites -->
+            <div class="service-card">
+                <div class="service-icon-wrap">🌐</div>
+                <span class="service-pill pill-live">Available Now</span>
+                <h3>Business Websites</h3>
+                <p>A professional, mobile-ready website built and maintained for you. Look credible, get found on Google, and make it easy for customers to reach you.</p>
+                <ul class="service-features">
+                    <li>Custom-designed for your business</li>
+                    <li>Mobile-friendly and fast</li>
+                    <li>Built to rank on local search</li>
+                    <li>Ongoing updates included</li>
+                    <li>No tech skills required from you</li>
+                </ul>
+                <div class="service-card-cta">
+                    <a href="#contact" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Custom AI -->
+            <div class="service-card coming-soon">
+                <div class="service-icon-wrap">🤖</div>
+                <span class="service-pill pill-soon">Coming Soon</span>
+                <h3>Custom AI Solutions</h3>
+                <p>Tailored AI tools built around your specific workflow. Automate the repetitive work, surface better insights, and free up your team for the jobs that matter.</p>
+                <ul class="service-features">
+                    <li>Built around your exact workflow</li>
+                    <li>Automate estimates, follow-ups & more</li>
+                    <li>Integrates with tools you already use</li>
+                    <li>Ongoing support and refinement</li>
+                    <li>Priced for small business budgets</li>
+                </ul>
+                <div class="service-card-cta">
+                    <a href="#contact" class="btn btn-outline">Join the Waitlist</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+    <div class="container">
+        <div class="hiw-header">
+            <div class="section-label">How It Works</div>
+            <h2>Simple from day one</h2>
+            <p>We handle everything. You stay focused on running your business.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Tell us about your business</h3>
+                <p>We hop on a free call to learn how you work, what you need, and which services will make the biggest difference right away.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>We build it for you</h3>
+                <p>From AI receptionists to websites to custom tools — we handle the setup end to end. No homework, no tech headaches, no hand-holding required from you.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Your business runs better</h3>
+                <p>Your technology runs quietly in the background — capturing leads, looking professional, and saving your team hours every week.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section id="who-we-serve">
+    <div class="container text-center">
+        <div class="serve-header">
+            <div class="section-label">Who We Serve</div>
+            <h2>Built for local service businesses</h2>
+            <p>If bigger competitors have better tech than you, Skora Labs was built for you.</p>
+        </div>
+        <div class="serve-grid">
+            <div class="serve-card">
+                <div class="serve-icon">🔧</div>
+                <h3>Contractors</h3>
+                <p>General, plumbing, electrical, roofing</p>
+            </div>
+            <div class="serve-card">
+                <div class="serve-icon">❄️</div>
+                <h3>HVAC</h3>
+                <p>Heating, cooling & ventilation</p>
+            </div>
+            <div class="serve-card">
+                <div class="serve-icon">🦷</div>
+                <h3>Dental Offices</h3>
+                <p>Appointments, FAQs, after-hours</p>
+            </div>
+            <div class="serve-card">
+                <div class="serve-icon">🏠</div>
+                <h3>Home Services</h3>
+                <p>Landscaping, cleaning, pest control</p>
+            </div>
+            <div class="serve-card">
+                <div class="serve-icon">⚖️</div>
+                <h3>Law Offices</h3>
+                <p>Intake, scheduling, after-hours</p>
+            </div>
+            <div class="serve-card">
+                <div class="serve-icon">🐾</div>
+                <h3>Vets & Med Spas</h3>
+                <p>Any practice fielding frequent calls</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="about-inner">
+            <div class="about-visual">
+                <div class="chat-label">Caller</div>
+                <div class="chat-bubble">Hi, do you guys do free estimates? And are you available this weekend?</div>
+                <div style="margin-top:1.1rem;">
+                    <div class="chat-label blue">AI Receptionist</div>
+                    <div class="chat-bubble right">We do! We offer free estimates Monday through Saturday. I can get you on the schedule — what's your name and address?</div>
+                </div>
+                <div style="margin-top:1.1rem;">
+                    <div class="chat-label">Caller</div>
+                    <div class="chat-bubble">Perfect, it's Sarah at 218 Oak Street.</div>
+                </div>
+                <p style="margin-top:1.25rem; font-size:0.78rem; color:#6B7280; text-align:center; font-style:italic;">That lead just got captured. You were on a job site.</p>
+            </div>
+            <div class="about-text">
+                <div class="section-label">About Skora Labs</div>
+                <h2>Leveling the playing field for small businesses</h2>
+                <p>Big companies have IT departments, development teams, and enterprise software. Local service businesses have duct tape and hustle — and they still deliver better work.</p>
+                <p>Skora Labs exists to give those businesses the technological edge they deserve. We build done-for-you technology — AI receptionists, websites, and custom tools — so the best roofer, dentist, or HVAC tech in your city wins more business than their bigger competitors.</p>
+                <p>Affordable. Fully managed. No technical knowledge required.</p>
+                <div style="margin-top:1.75rem;">
+                    <a href="#contact" class="btn btn-primary">Work with us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+    <div class="container text-center">
+        <div class="team-header">
+            <div class="section-label">The Team</div>
+            <h2>People behind Skora Labs</h2>
+            <p>A small team with a big belief: local businesses deserve great technology too.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">DW</div>
+                <h3>Drew Wilson</h3>
+                <div class="team-role">Founder &amp; CEO</div>
+                <p>Building technology that levels the playing field for local service businesses across the country.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="contact-inner">
+            <div class="contact-info">
+                <div class="section-label">Get In Touch</div>
+                <h2>Let's figure out what you need</h2>
+                <p>Fill out the form and we'll reach out within one business day. We'll learn about your business and recommend the right starting point — no pressure, no pitch decks.</p>
+                <div class="contact-detail">
+                    <div class="contact-icon">📧</div>
+                    <div><a href="mailto:hello@skoralabs.com">hello@skoralabs.com</a></div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">📞</div>
+                    <div><a href="tel:+15555555555">(555) 555-5555</a></div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <div id="contactFormWrap">
+                    <h3>Book a Free Consultation</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="Jane">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Smith">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bizName">Business Name</label>
+                        <input type="text" id="bizName" placeholder="Riverside Plumbing LLC">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="jane@yourbusiness.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" placeholder="(555) 000-0000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">What are you most interested in?</label>
+                        <select id="service">
+                            <option value="">Select a service</option>
+                            <option>AI Receptionist</option>
+                            <option>Business Website</option>
+                            <option>Both — AI Receptionist + Website</option>
+                            <option>Custom AI Solution (waitlist)</option>
+                            <option>Not sure yet — just exploring</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell us about your business</label>
+                        <textarea id="message" placeholder="What do you do, how big is your team, and what's the biggest thing holding you back right now?"></textarea>
+                    </div>
+                    <button class="btn btn-primary form-submit" onclick="handleSubmit()">Send Message →</button>
+                </div>
+                <div class="form-success" id="formSuccess">
+                    <div class="success-icon">✅</div>
+                    <h3>You're all set!</h3>
+                    <p>Thanks for reaching out. We'll be in touch within one business day to set up your free consultation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container footer-inner">
+        <a href="#hero" class="footer-logo">Skora<span>Labs</span></a>
+        <p>© 2026 Skora Labs. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+        document.getElementById('navCta').classList.toggle('open');
+    }
+
+    document.querySelectorAll('#navLinks a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('open');
+            document.getElementById('navCta').classList.remove('open');
+        });
+    });
+
+    function handleSubmit() {
+        const firstName = document.getElementById('firstName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        if (!firstName || !email) {
+            alert('Please fill in at least your name and email.');
+            return;
+        }
+        document.getElementById('contactFormWrap').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    }
+
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        nav.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.06)' : 'none';
+    });
+</script>
+
+</body>
+</html>
