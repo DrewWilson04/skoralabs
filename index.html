@@ -694,7 +694,7 @@
                 <p>Fill out the form and we'll reach out within one business day. We'll learn about your business and recommend the right starting point — no pressure, no pitch decks.</p>
                 <div class="contact-detail">
                     <div class="contact-icon">📧</div>
-                    <div><a href="mailto:hello@skoralabs.com">hello@skoralabs.com</a></div>
+                    <div><a href="mailto:drew@skoralabs.com">drew@skoralabs.com</a></div>
                 </div>
                 <div class="contact-detail">
                     <div class="contact-icon">📞</div>
@@ -707,30 +707,30 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" placeholder="Jane">
+                            <input type="text" id="firstName" name="first_name" placeholder="Jane">
                         </div>
                         <div class="form-group">
                             <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" placeholder="Smith">
+                            <input type="text" id="lastName" name="last_name" placeholder="Smith">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="bizName">Business Name</label>
-                        <input type="text" id="bizName" placeholder="Riverside Plumbing LLC">
+                        <input type="text" id="bizName" name="business_name" placeholder="Riverside Plumbing LLC">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="hello@skoralabs.com">
+                            <input type="email" id="email" name="email" placeholder="hello@skoralabs.com">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="tel" id="phone" placeholder="(937)668-4122">
+                            <input type="tel" id="phone" name="phone" placeholder="(937)668-4122">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="service">What are you most interested in?</label>
-                        <select id="service">
+                        <select id="service" name="service">
                             <option value="">Select a service</option>
                             <option>AI Receptionist</option>
                             <option>Business Website</option>
@@ -741,9 +741,10 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Tell us about your business</label>
-                        <textarea id="message" placeholder="What do you do, how big is your team, and what's the biggest thing holding you back right now?"></textarea>
+                        <textarea id="message" name="message" placeholder="What do you do, how big is your team, and what's the biggest thing holding you back right now?"></textarea>
                     </div>
-                    <button class="btn btn-primary form-submit" onclick="handleSubmit()">Send Message →</button>
+                    <button class="btn btn-primary form-submit" id="submitBtn" onclick="handleSubmit()">Send Message →</button>
+                    <p id="formError" style="display:none; color:#DC2626; font-size:0.85rem; margin-top:0.75rem;">Something went wrong — please try again or email us directly.</p>
                 </div>
                 <div class="form-success" id="formSuccess">
                     <div class="success-icon">✅</div>
@@ -781,15 +782,48 @@
         });
     });
 
-    function handleSubmit() {
+    async function handleSubmit() {
         const firstName = document.getElementById('firstName').value.trim();
         const email = document.getElementById('email').value.trim();
+
         if (!firstName || !email) {
             alert('Please fill in at least your name and email.');
             return;
         }
-        document.getElementById('contactFormWrap').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
+
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        document.getElementById('formError').style.display = 'none';
+
+        const formData = {
+            first_name:    firstName,
+            last_name:     document.getElementById('lastName').value.trim(),
+            business_name: document.getElementById('bizName').value.trim(),
+            email:         email,
+            phone:         document.getElementById('phone').value.trim(),
+            service:       document.getElementById('service').value,
+            message:       document.getElementById('message').value.trim(),
+        };
+
+        try {
+            const response = await fetch('https://formspree.io/f/mlgvavdq', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                document.getElementById('contactFormWrap').style.display = 'none';
+                document.getElementById('formSuccess').style.display = 'block';
+            } else {
+                throw new Error('Server error');
+            }
+        } catch (err) {
+            btn.textContent = 'Send Message →';
+            btn.disabled = false;
+            document.getElementById('formError').style.display = 'block';
+        }
     }
 
     window.addEventListener('scroll', () => {
