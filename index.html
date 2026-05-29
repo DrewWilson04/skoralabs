@@ -291,6 +291,144 @@
         .serve-card h3 { font-size: 0.95rem; font-weight: 600; color: #111827; }
         .serve-card p { font-size: 0.8rem; margin-top: 0.3rem; color: #6B7280; }
 
+        /* ── ALSO STRIP ── */
+        .also-strip {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: #F8FAFF;
+            border: 1px solid #DBEAFE;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0;
+            flex-wrap: wrap;
+        }
+        .also-strip-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .also-strip-text { flex: 1; font-size: 0.875rem; min-width: 200px; }
+        .also-strip-text strong { color: #111827; font-weight: 600; }
+        .also-strip-text span { color: #6B7280; }
+        .btn-xs {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        /* ── INDUSTRY TABS ── */
+        .serve-header { margin-bottom: 2.5rem; }
+        .serve-header h2 { margin-bottom: 0.75rem; }
+        .serve-header p { font-size: 1.05rem; max-width: 480px; margin: 0 auto; }
+
+        .industry-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2.5rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .industry-tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 0.5rem 1.1rem;
+            border-radius: 100px;
+            border: 1.5px solid #E5E7EB;
+            background: #fff;
+            color: #4B5563;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { border-color: #93C5FD; color: #1D4ED8; background: #EFF6FF; }
+        .tab-btn.active { background: #2563EB; border-color: #2563EB; color: #fff; }
+
+        .industry-panel { display: none; animation: fadeIn 0.25s ease; }
+        .industry-panel.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .industry-panel.active { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        .panel-headline {
+            font-size: clamp(1.25rem, 3vw, 1.6rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            color: #111827;
+        }
+        .panel-description { font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.75rem; }
+
+        .panel-list-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #6B7280;
+            margin-bottom: 0.6rem;
+        }
+        .panel-list { list-style: none; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .panel-list li {
+            font-size: 0.88rem;
+            color: #374151;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            line-height: 1.5;
+        }
+        .panel-list li .li-icon { flex-shrink: 0; margin-top: 0.05rem; font-size: 0.8rem; font-weight: 700; }
+        .panel-list.pain li .li-icon { color: #EF4444; }
+        .panel-list.benefits li .li-icon { color: #2563EB; }
+
+        .panel-chat {
+            background: linear-gradient(145deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        .panel-chat-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #3B82F6;
+            margin-bottom: 1.25rem;
+        }
+        .panel-chat-bubble {
+            margin-bottom: 0.9rem;
+        }
+        .bubble-label { font-size: 0.68rem; font-weight: 600; color: #6B7280; margin-bottom: 0.3rem; letter-spacing: 0.03em; }
+        .bubble-label.right { text-align: right; color: #2563EB; }
+        .bubble-text {
+            background: #fff;
+            border-radius: 14px 14px 14px 3px;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.86rem;
+            color: #111827;
+            line-height: 1.55;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+            display: inline-block;
+            max-width: 92%;
+        }
+        .bubble-text.right {
+            background: #2563EB;
+            color: #fff;
+            border-radius: 14px 14px 3px 14px;
+            float: right;
+        }
+        .bubble-clear { clear: both; }
+
         /* ── ABOUT ── */
         #about { background: #F9FAFB; }
         .about-inner {
@@ -444,7 +582,6 @@
     <div class="container nav-inner">
         <a href="#hero" class="nav-logo">Skora<span>Labs</span></a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#services">Services</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#who-we-serve">Who We Serve</a></li>
             <li><a href="#about">About</a></li>
@@ -488,80 +625,13 @@
                 <div class="stat-label">Not months to get started</div>
             </div>
             <div>
-                <div class="stat-num">3</div>
-                <div class="stat-label">Core services (and growing)</div>
+                <div class="stat-num">∞</div>
+                <div class="stat-label">Leads you won't miss</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
-    <div class="container">
-        <div class="services-header">
-            <div class="section-label">Our Services</div>
-            <h2>Everything you need.<br>Nothing you don't.</h2>
-            <p>We build and manage the technology — you run your business. Start with one service or all three.</p>
-        </div>
-        <div class="services-grid">
-
-            <!-- AI Receptionist -->
-            <div class="service-card featured">
-                <div class="service-icon-wrap">🎙️</div>
-                <span class="service-pill pill-flagship">Flagship</span>
-                <h3>AI Receptionist</h3>
-                <p>A real-sounding AI that answers every call 24/7 — handling FAQs, taking messages, and transferring calls. Your business never misses a lead, even at 2am.</p>
-                <ul class="service-features">
-                    <li>Answers calls in your business's name</li>
-                    <li>Handles FAQs and books appointments</li>
-                    <li>Takes messages & sends warm transfers</li>
-                    <li>Works nights, weekends, and holidays</li>
-                    <li>Set up and managed entirely for you</li>
-                </ul>
-                <div class="service-card-cta">
-                    <a href="#contact" class="btn btn-primary">Get Started</a>
-                </div>
-            </div>
-
-            <!-- Websites -->
-            <div class="service-card">
-                <div class="service-icon-wrap">🌐</div>
-                <span class="service-pill pill-live">Available Now</span>
-                <h3>Business Websites</h3>
-                <p>A professional, mobile-ready website built and maintained for you. Look credible, get found on Google, and make it easy for customers to reach you.</p>
-                <ul class="service-features">
-                    <li>Custom-designed for your business</li>
-                    <li>Mobile-friendly and fast</li>
-                    <li>Built to rank on local search</li>
-                    <li>Ongoing updates included</li>
-                    <li>No tech skills required from you</li>
-                </ul>
-                <div class="service-card-cta">
-                    <a href="#contact" class="btn btn-outline">Learn More</a>
-                </div>
-            </div>
-
-            <!-- Custom AI -->
-            <div class="service-card coming-soon">
-                <div class="service-icon-wrap">🤖</div>
-                <span class="service-pill pill-soon">Coming Soon</span>
-                <h3>Custom AI Solutions</h3>
-                <p>Tailored AI tools built around your specific workflow. Automate the repetitive work, surface better insights, and free up your team for the jobs that matter.</p>
-                <ul class="service-features">
-                    <li>Built around your exact workflow</li>
-                    <li>Automate estimates, follow-ups & more</li>
-                    <li>Integrates with tools you already use</li>
-                    <li>Ongoing support and refinement</li>
-                    <li>Priced for small business budgets</li>
-                </ul>
-                <div class="service-card-cta">
-                    <a href="#contact" class="btn btn-outline">Join the Waitlist</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 <!-- HOW IT WORKS -->
 <section id="how-it-works">
@@ -593,34 +663,22 @@
 
 <!-- WHO WE SERVE -->
 <section id="who-we-serve">
-    <div class="container text-center">
-        <div class="serve-header">
+    <div class="container">
+        <div class="serve-header text-center">
             <div class="section-label">Who We Serve</div>
-            <h2>Built for local service businesses</h2>
-            <p>If bigger competitors have better tech than you, Skora Labs was built for you.</p>
+            <h2>Built for your industry</h2>
+            <p>See exactly how our AI receptionist works for businesses like yours.</p>
         </div>
-        <div class="serve-grid">
-            <div class="serve-card">
-                <div class="serve-icon">🔧</div>
-                <h3>Contractors</h3>
+        <div class="also-strip" style="margin-bottom:2.5rem;">
+            <div class="also-strip-icon">🌐</div>
+            <div class="also-strip-text">
+                <strong>We also build websites.</strong>
+                <span>Need a professional site for your business? We design, build, and manage it — no tech skills needed.</span>
             </div>
-            <div class="serve-card">
-                <div class="serve-icon">💈</div>
-                <h3>Hair Salons & Barbers</h3>
-            </div>
-            <div class="serve-card">
-                <div class="serve-icon">🦷</div>
-                <h3>Dental Offices</h3>
-            </div>
-            <div class="serve-card">
-                <div class="serve-icon">🏠</div>
-                <h3>Real Estate</h3>
-            </div>
-            <div class="serve-card">
-                <div class="serve-icon">♾️</div>
-                <h3>Any Industry<h3>
-            </div>
+            <a href="#contact" class="btn btn-outline btn-xs">Ask us about it</a>
         </div>
+        <div class="industry-tabs" id="industryTabs"></div>
+        <div id="industryPanels"></div>
     </div>
 </section>
 
@@ -667,8 +725,14 @@
             <div class="team-card">
                 <div class="team-avatar">DW</div>
                 <h3>Drew Wilson</h3>
-                <div class="team-role">Founder &amp; CEO</div>
+                <div class="team-role">Co-Founder</div>
                 <p>Building technology that levels the playing field for local service businesses across the country.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">RG</div>
+                <h3>Rylan Guyton</h3>
+                <div class="team-role">Co-Founder</div>
+                <p>Helping local businesses grow through smarter, more accessible technology solutions.</p>
             </div>
         </div>
     </div>
@@ -684,11 +748,11 @@
                 <p>Fill out the form and we'll reach out within one business day. We'll learn about your business and recommend the right starting point — no pressure, no pitch decks.</p>
                 <div class="contact-detail">
                     <div class="contact-icon">📧</div>
-                    <div><a href="mailto:drew@skoralabs.com">hello@skoralabs.com</a></div>
+                    <div><a href="mailto:hello@skoralabs.com">hello@skoralabs.com</a></div>
                 </div>
                 <div class="contact-detail">
                     <div class="contact-icon">📞</div>
-                    <div><a href="tel:+15555555555">(937)668-4122</a></div>
+                    <div><a href="tel:+19376684122">(937)668-4122</a></div>
                 </div>
             </div>
             <div class="contact-form">
@@ -715,7 +779,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+                            <input type="tel" id="phone" name="phone" placeholder="(937)668-4122">
                         </div>
                     </div>
                     <div class="form-group">
@@ -724,8 +788,7 @@
                             <option value="">Select a service</option>
                             <option>AI Receptionist</option>
                             <option>Business Website</option>
-                            <option>Both — AI Receptionist + Website</option>
-                            <option>Custom AI Solution (waitlist)</option>
+                            <option>AI Receptionist + Website</option>
                             <option>Not sure yet — just exploring</option>
                         </select>
                     </div>
@@ -752,7 +815,7 @@
         <a href="#hero" class="footer-logo">Skora<span>Labs</span></a>
         <p>© 2026 Skora Labs. All rights reserved.</p>
         <ul class="footer-links">
-            <li><a href="#services">Services</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -815,6 +878,172 @@
             document.getElementById('formError').style.display = 'block';
         }
     }
+
+    // ── Industry Tabs ──
+    const INDUSTRIES = [
+        {
+            id: 'barbers', icon: '💇', label: 'Hair & Barbers',
+            headline: 'Never lose a booking to a missed call again.',
+            description: "When you're mid-cut, the last thing you can do is answer your phone. But your next client is calling — and if you don't pick up, they're booking somewhere else.",
+            pain: ["Clients call while you're with someone and hang up", 'Appointment requests pile up in voicemail overnight', 'After-hours booking requests go totally unanswered'],
+            benefits: ["Answers every call even while you're with a client", 'Takes booking requests and relays them instantly', 'Handles pricing, hours, and services questions 24/7', 'Covers after-hours so no inquiry slips through'],
+            chat: [
+                { side: 'caller', text: "Hi, I'd like to book a haircut for Saturday morning — do you have anything open?" },
+                { side: 'ai',     text: "Absolutely! Saturday mornings fill up fast. Let me grab your info so we can get you confirmed — what's your name and best callback number?" },
+                { side: 'caller', text: "Marcus, at (555) 210-4400." },
+                { side: 'ai',     text: "Perfect, Marcus! You're on the list — someone will text you shortly to lock in your time. Thanks for calling!" },
+            ],
+        },
+        {
+            id: 'plumbing', icon: '🔧', label: 'Plumbing',
+            headline: "Capture every job, even when you're under a sink.",
+            description: "Plumbers can't answer their phone mid-job. But the call that goes to voicemail is often someone with water pouring through their ceiling — and they're already calling the next plumber.",
+            pain: ['Miss calls while actively working on a job', 'Emergency leads call once and move to a competitor', 'After-hours pipe bursts go to voicemail all night'],
+            benefits: ['Answers 24/7 including nights and weekends', 'Collects address, issue description, and contact info', 'Escalates true emergencies with an immediate transfer', 'Books non-urgent service calls and estimate requests'],
+            chat: [
+                { side: 'caller', text: "Hi, my pipe just burst under the kitchen sink. There's water everywhere." },
+                { side: 'ai',     text: "Let's get someone out to you right away. Can you give me your address so I can page the on-call tech immediately?" },
+                { side: 'caller', text: "412 Birchwood Drive." },
+                { side: 'ai',     text: "Got it — transferring you to our on-call tech right now. Stay on the line." },
+            ],
+        },
+        {
+            id: 'hvac', icon: '❄️', label: 'HVAC',
+            headline: 'Handle peak season calls without dropping the ball.',
+            description: "During a heat wave or cold snap, your phone doesn't stop ringing. One missed call during peak season is money out the door.",
+            pain: ['Peak season overwhelms your ability to answer calls', 'Emergency breakdowns happen at 10pm on a Friday', 'Basic FAQ calls tie up your team during busy hours'],
+            benefits: ['Handles high call volume without missing a beat', 'Books tune-ups, estimates, and maintenance visits', 'Answers filter, warranty, and service area questions', 'Transfers emergency breakdown calls instantly'],
+            chat: [
+                { side: 'caller', text: "My AC stopped working last night and it's 90 degrees in my house." },
+                { side: 'ai',     text: "I'm sorry to hear that — let's get someone out today. Can I get your name and address to schedule an emergency visit?" },
+                { side: 'caller', text: "Jennifer Cole, 8 Maple Lane." },
+                { side: 'ai',     text: "Thanks Jennifer — flagging this as urgent. A tech will contact you within the hour to confirm." },
+            ],
+        },
+        {
+            id: 'realestate', icon: '🏡', label: 'Real Estate',
+            headline: 'Buyers move fast. Your phone should too.',
+            description: "In real estate, the agent who responds first usually wins the client. If you're showing a home or in a closing when the call comes in, that lead is gone.",
+            pain: ['Miss buyer and seller calls while showing homes', 'Listing leads go cold when no one answers quickly', 'After-hours inquiries from online listings go unanswered'],
+            benefits: ['Answers every listing inquiry and qualifies the lead', "Schedules showings while you're unavailable", 'Captures buyer/seller contact info instantly', 'Handles after-hours calls from Zillow and Realtor.com'],
+            chat: [
+                { side: 'caller', text: "Hi, I saw your listing on Zillow for the house on Elm Street — is it still available?" },
+                { side: 'ai',     text: "Yes, it's still active! I'd love to get you scheduled for a showing. Are you available this week?" },
+                { side: 'caller', text: "Thursday or Friday afternoon works for me." },
+                { side: 'ai',     text: "Perfect — let me grab your name and number and we'll get that confirmed with the agent today." },
+            ],
+        },
+        {
+            id: 'health', icon: '🏥', label: 'Health Offices',
+            headline: 'Your front desk, available around the clock.',
+            description: "Medical and dental offices deal with a constant stream of calls — appointments, insurance questions, prescription refills. Your front desk can only handle so much.",
+            pain: ['Front desk overwhelmed with routine calls all day', 'Patients calling after hours get no answer', 'Scheduling calls pull staff away from in-person patients'],
+            benefits: ['Books and confirms appointments 24/7', 'Answers hours, insurance, and services questions', 'Handles new patient intake and callback requests', 'Escalates urgent medical concerns immediately'],
+            chat: [
+                { side: 'caller', text: "Hi, I'm a new patient and I'd like to schedule a cleaning." },
+                { side: 'ai',     text: "Welcome! We'd love to get you in. Do you have a preference — mornings or afternoons?" },
+                { side: 'caller', text: "Mornings work best for me." },
+                { side: 'ai',     text: "Got it! Let me grab your name, date of birth, and insurance and we'll get you set up." },
+            ],
+        },
+        {
+            id: 'legal', icon: '⚖️', label: 'Law Offices',
+            headline: "Never let a new client slip to a competitor.",
+            description: "Someone calling a law firm is usually stressed and calling multiple offices. The first attorney's office to respond professionally often wins the case.",
+            pain: ['Potential clients call once and move on if they hit voicemail', 'After-hours calls from urgent situations go unanswered', 'Staff spend time on intake instead of billable work'],
+            benefits: ['Answers new client calls professionally at any hour', 'Collects intake info — name, case type, contact details', 'Schedules consultations and sends reminders', 'Escalates urgent and time-sensitive legal matters'],
+            chat: [
+                { side: 'caller', text: "I was in a car accident this morning and I need to speak with someone." },
+                { side: 'ai',     text: "I'm sorry to hear that — you've reached the right place. I can get you with one of our attorneys as soon as possible. Can I get your name and a good number?" },
+                { side: 'caller', text: "Daniel Torres, (555) 318-0022." },
+                { side: 'ai',     text: "Thank you, Daniel. Someone will call you back within the hour. You're in good hands." },
+            ],
+        },
+        {
+            id: 'vets', icon: '🐾', label: 'Veterinary',
+            headline: 'Pet owners need answers fast. Be there for them.',
+            description: "A worried pet owner calls, and if they can't get through, they call every other vet in town. Your AI receptionist makes sure that doesn't happen.",
+            pain: ['Exam rooms are busy and calls go unanswered', 'After-hours emergencies have nowhere to turn', 'Routine prescription and appointment calls clog the front desk'],
+            benefits: ['Answers calls and handles routine scheduling', 'Triages urgent situations and directs to emergency care', 'Handles prescription refill requests and FAQs', 'Covers after-hours so worried owners always reach someone'],
+            chat: [
+                { side: 'caller', text: "Hi, my dog ate something off the ground and he's acting really weird. I'm worried." },
+                { side: 'ai',     text: "Let's make sure he's okay. Can you tell me what he may have eaten and how he's acting right now?" },
+                { side: 'caller', text: "I'm not sure what it was — he's lethargic and won't eat." },
+                { side: 'ai',     text: "Given those symptoms I'm going to transfer you to our on-call staff right away. Hold tight." },
+            ],
+        },
+        {
+            id: 'home', icon: '🏠', label: 'Home Services',
+            headline: 'Win the job before your competitor even calls back.',
+            description: "Landscapers, cleaners, pest control — whoever calls back first usually gets the job. Your AI answers immediately and captures the lead while you're still on the previous one.",
+            pain: ["Can't answer calls while actively working on a job", 'Estimate requests pile up and go cold by end of day', 'Competitors who answer first get the business'],
+            benefits: ['Answers immediately and collects job details', 'Schedules estimate appointments without back-and-forth', 'Handles seasonal inquiry spikes without missing anyone', 'Captures lead info so you can follow up with context'],
+            chat: [
+                { side: 'caller', text: "Hi, I'm looking for a quote on weekly lawn care for my property." },
+                { side: 'ai',     text: "We'd love to help! Can I get your address and a quick description — lot size, front and back yard, anything special?" },
+                { side: 'caller', text: "Sure — 7 Cedar Road, about a quarter acre, front and back." },
+                { side: 'ai',     text: "Perfect. Got you logged — someone will follow up today to walk you through packages and pricing." },
+            ],
+        },
+    ];
+
+    function buildIndustryTabs() {
+        const tabBar = document.getElementById('industryTabs');
+        const panels = document.getElementById('industryPanels');
+
+        INDUSTRIES.forEach((ind, i) => {
+            // Tab button
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+            btn.textContent = ind.icon + ' ' + ind.label;
+            btn.dataset.id = ind.id;
+            btn.addEventListener('click', () => switchTab(ind.id));
+            tabBar.appendChild(btn);
+
+            // Panel
+            const panel = document.createElement('div');
+            panel.className = 'industry-panel' + (i === 0 ? ' active' : '');
+            panel.id = 'panel-' + ind.id;
+
+            const painItems  = ind.pain.map(t => `<li><span class="li-icon">✕</span>${t}</li>`).join('');
+            const benefItems = ind.benefits.map(t => `<li><span class="li-icon">✓</span>${t}</li>`).join('');
+            const bubbles    = ind.chat.map(msg => {
+                const isAI = msg.side === 'ai';
+                return `
+                    <div class="panel-chat-bubble">
+                        <div class="bubble-label${isAI ? ' right' : ''}">${isAI ? 'AI Receptionist' : 'Caller'}</div>
+                        <div class="bubble-text${isAI ? ' right' : ''}">${msg.text}</div>
+                        <div class="bubble-clear"></div>
+                    </div>`;
+            }).join('');
+
+            panel.innerHTML = `
+                <div class="panel-info">
+                    <div class="panel-headline">${ind.headline}</div>
+                    <p class="panel-description">${ind.description}</p>
+                    <div class="panel-list-label">Without Skora Labs</div>
+                    <ul class="panel-list pain">${painItems}</ul>
+                    <div class="panel-list-label">With Skora Labs</div>
+                    <ul class="panel-list benefits">${benefItems}</ul>
+                    <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem;">Get Started for ${ind.icon} ${ind.label}</a>
+                </div>
+                <div class="panel-chat">
+                    <div class="panel-chat-title">Sample call — ${ind.label}</div>
+                    ${bubbles}
+                </div>`;
+            panels.appendChild(panel);
+        });
+    }
+
+    function switchTab(id) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+        document.querySelectorAll('.industry-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
+        // Scroll active tab into view on mobile
+        const activeBtn = document.querySelector(`.tab-btn[data-id="${id}"]`);
+        if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    buildIndustryTabs();
 
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('nav');
